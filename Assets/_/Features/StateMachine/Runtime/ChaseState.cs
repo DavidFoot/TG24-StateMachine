@@ -19,7 +19,11 @@ namespace StateMachineRuntime
 
         public override void Tick(float _deltaTime)
         {
-            //Debug.Log(_character.GetName());
+            _character.DoChase(_deltaTime);
+            if (_character.TargetIsOutOfRange())
+            {
+                _stateMachine.GoToIdleState();
+            }
         }
 
 

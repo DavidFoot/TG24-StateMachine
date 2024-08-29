@@ -18,10 +18,9 @@ namespace StateMachineRuntime
 
         public override void Tick(float _deltaTime)
         {
-            _character.DoIdle(Time.deltaTime);
+            _character.DoIdle(_deltaTime);
             if (_character.HasFoundTarget())
             {
-                Debug.Log("Found You!!");
                 _stateMachine.GoToChaseState();
             }
         }

@@ -22,7 +22,15 @@ namespace StateMachineRuntime
 
         public void DoIdle(float deltaTime)
         {
-
+            Debug.Log("Do Nothing");
+        }
+        public void DoChase(float deltaTime)
+        {
+            transform.position = Vector3.MoveTowards(transform.position,_target.transform.position, _moveSpeed*deltaTime);
+        }
+        public bool TargetIsOutOfRange()
+        {
+            return !HasFoundTarget();
         }
 
         public bool HasFoundTarget() {
