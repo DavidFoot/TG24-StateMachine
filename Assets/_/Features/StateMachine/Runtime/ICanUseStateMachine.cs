@@ -1,5 +1,5 @@
 ﻿using System;
-
+using UnityEngine;
 namespace StateMachineRuntime
 {
     public interface ICanUseStateMachine
@@ -9,5 +9,6 @@ namespace StateMachineRuntime
         public String GetName();
         public bool HasFoundTarget();
         public bool TargetIsOutOfRange();
+        public GameObject GetObject();
     }
 }

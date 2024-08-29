@@ -19,10 +19,13 @@ namespace StateMachineRuntime
         {
             return gameObject.name;
         }
-
+        public GameObject GetObject()
+        {
+            return gameObject;
+        }
         public void DoIdle(float deltaTime)
         {
-            Debug.Log("Do Nothing");
+            //Debug.Log("Do Nothing");
         }
         public void DoChase(float deltaTime)
         {
@@ -30,7 +33,7 @@ namespace StateMachineRuntime
         }
         public bool TargetIsOutOfRange()
         {
-            return !HasFoundTarget();
+            return  Vector3.SqrMagnitude(_target.position - transform.position) > _outOfRangeDistancee * _outOfRangeDistancee;
         }
 
         public bool HasFoundTarget() {
@@ -46,6 +49,7 @@ namespace StateMachineRuntime
         #region Privates & Protected
 
         [SerializeField] private float _detectionRange = 5;
+        [SerializeField] private float _outOfRangeDistancee = 15;
         [SerializeField] private float _moveSpeed = 2;
         [SerializeField] private float _health = 100;
         [SerializeField] private float _stamina = 10;

@@ -8,13 +8,12 @@ namespace StateMachineRuntime
 
         #region Unity API
 
-        public State(ICanUseStateMachine character, StateMachine machine)
+        public State(ICanUseStateMachine character)
         {
             _character = character;
-            _stateMachine = machine;
         }
 
-        public abstract void Tick(float _deltaTime);
+        public abstract State Tick(float _deltaTime);
 
         public virtual void OnStateEnter() { }
 
@@ -33,7 +32,6 @@ namespace StateMachineRuntime
         #region Privates & Protected
 	    
         protected ICanUseStateMachine _character;
-        protected StateMachine _stateMachine;
 
         #endregion
     }

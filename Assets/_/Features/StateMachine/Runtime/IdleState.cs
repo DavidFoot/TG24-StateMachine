@@ -14,18 +14,22 @@ namespace StateMachineRuntime
 
         #region Main methods
 
-        public IdleState(ICanUseStateMachine character, StateMachine machine) : base(character, machine) { }
+        public IdleState(ICanUseStateMachine character) : base(character) { }
 
-        public override void Tick(float _deltaTime)
+        public override State Tick(float _deltaTime)
         {
             _character.DoIdle(_deltaTime);
             if (_character.HasFoundTarget())
             {
-                _stateMachine.GoToChaseState();
+                return new ChaseState(_character);
             }
+            return this;
         }
 
-
+        public override void OnStateEnter()
+        {
+            _character.GetObject().GetComponent<MeshRenderer>().material.color = Color.blue;
+        }
         #endregion
 
         #region Utils
