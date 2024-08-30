@@ -17,15 +17,14 @@ namespace BehaviorTree
             ConstrucPatrolNodeList();
         }
 
-        void Start()
-        {
-            Debug.Log(String.Join(", ", _patrolNode));
-        }
-
         #endregion
 
         #region Main methods
-
+        
+        public List<Transform> GetWaypoints()
+        {
+            return _patrolNode;
+        }
         private void ConstrucPatrolNodeList()
         {
             _patrolNode = new();

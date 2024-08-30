@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace BehaviorTree
 {
@@ -10,11 +11,12 @@ namespace BehaviorTree
 
         #region Unity API
 
-        private void Awake()
+        private void Start()
         {
             //_mainNode = new AllNodesCheckSelector();
-            //_mainNode = new Selector();
-            //_mainNode._children.Add(new ReturnFailLeaf());
+            _mainNode = new AllNodesCheckSelector();
+            _mainNode._children.Add(new PatrolLeaf(transform,GetComponent<NavMeshAgent>(), _patrolPoints.GetWaypoints()));
+
             //_mainNode._children.Add(new WaitForSecondsLeaf(2));
             //_mainNode._children.Add(new HelloWorldLeaf("Bonjour les amis"));
             ///_compositeNode_01 = new Sequence();
@@ -36,7 +38,7 @@ namespace BehaviorTree
 
         private void Update()
         {
-           //_mainNode.Process();
+           _mainNode.Process();
         }
 
         #endregion
@@ -52,13 +54,12 @@ namespace BehaviorTree
         #region Privates & Protected
 
         private Composite _mainNode;
-        private Composite _compositeNode_01;
-        
-        
+        private Composite _compositeNode_01;     
         private Selector _selector;
 
 
         [SerializeField] GameObject _gameObject;
+        [SerializeField] PatrolManager _patrolPoints;
 
         #endregion
     }
