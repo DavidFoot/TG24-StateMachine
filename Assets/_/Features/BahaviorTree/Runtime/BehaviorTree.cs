@@ -12,23 +12,31 @@ namespace BehaviorTree
 
         private void Awake()
         {
-            _mainSequence = new Sequence();
-            _mainSequence._children.Add(new GameObjectActivationLeaf(_gameObject, false));
+            //_mainNode = new AllNodesCheckSelector();
+            //_mainNode = new Selector();
+            //_mainNode._children.Add(new ReturnFailLeaf());
+            //_mainNode._children.Add(new WaitForSecondsLeaf(2));
+            //_mainNode._children.Add(new HelloWorldLeaf("Bonjour les amis"));
+            ///_compositeNode_01 = new Sequence();
+            //_compositeNode_01._children.Add(new HelloWorldLeaf("Bonjour les amis"));
+
+            //_compositeNode_01._children.Add(new WaitForSecondsLeaf(2));
+            //_compositeNode_01._children.Add(new GameObjectActivationLeaf(_gameObject, true));
+            //_compositeNode_01._children.Add(new WaitForSecondsLeaf(2));
+            //_compositeNode_01._children.Add(new GameObjectActivationLeaf(_gameObject, false));
+            //_compositeNode_01._children.Add(new HelloWorldLeaf("Ceci est une sequence"));
+
 
             //_selector = new Selector();
-            //_composite = new Sequence();
-            //_composite._children.Add(new ReturnFailLeaf());
-            //_composite._children.Add(new HelloWorldLeaf("David"));
-            //_composite._children.Add(new WaitForSecondsLeaf(2));
-            //_composite._children.Add(new HelloWorldLeaf("Jean"));
-            //_selector._children.Add(new HelloWorldLeaf("Je suis un selector"));
-            //_mainSequence._children.Add(_composite);
-            //_mainSequence._children.Add(_selector);
+            //_selector._children.Add(new HelloWorldLeaf("This is a Selector"));
+
+            //_mainNode._children.Add(_compositeNode_01);
+            //_mainNode._children.Add(_selector);
         }
 
         private void Update()
         {
-            _mainSequence.Process();
+           //_mainNode.Process();
         }
 
         #endregion
@@ -43,9 +51,13 @@ namespace BehaviorTree
 
         #region Privates & Protected
 
-        private Sequence _mainSequence;
-        private Sequence _composite;
+        private Composite _mainNode;
+        private Composite _compositeNode_01;
+        
+        
         private Selector _selector;
+
+
         [SerializeField] GameObject _gameObject;
 
         #endregion

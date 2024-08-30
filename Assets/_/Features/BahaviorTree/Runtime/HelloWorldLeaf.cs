@@ -11,7 +11,7 @@ namespace BehaviorTree
         }
         public override State Process()
         {
-            Debug.Log("NodeLeafHelloWorld" + _text);
+            Debug.Log(_text);
             return State.SUCCESS;
         }
     }
