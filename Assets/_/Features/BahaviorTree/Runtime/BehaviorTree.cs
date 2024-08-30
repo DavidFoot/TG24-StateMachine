@@ -15,6 +15,7 @@ namespace BehaviorTree
         {
             //_mainNode = new AllNodesCheckSelector();
             _mainNode = new AllNodesCheckSelector();
+            _mainNode._children.Add(new GoToWCIfFree(transform,GetComponent<NavMeshAgent>(),_wc, _wcSpeed));
             _mainNode._children.Add(new PatrolLeaf(transform,GetComponent<NavMeshAgent>(), _patrolPoints.GetWaypoints()));
 
             //_mainNode._children.Add(new WaitForSecondsLeaf(2));
@@ -60,6 +61,8 @@ namespace BehaviorTree
 
         [SerializeField] GameObject _gameObject;
         [SerializeField] PatrolManager _patrolPoints;
+        [SerializeField] WCBehavior _wc;
+        [SerializeField] float _wcSpeed;
 
         #endregion
     }

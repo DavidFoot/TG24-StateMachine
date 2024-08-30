@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace BehaviorTree
 {
@@ -38,5 +39,53 @@ namespace BehaviorTree
             return State.FAIL;
         }
     }
+    public class CheckIfGameObjectIsActive : Leaf
+    {
+        public CheckIfGameObjectIsActive(GameObject go) {
+            _gameObject = go;
+        }
+        public override State Process()
+        {
+            if (_gameObject = null) { return State.FAIL; }
+            if (_gameObject.activeSelf) { return State.SUCCESS; }
+            return State.FAIL;
 
+        }
+        private GameObject _gameObject;
+
+    }
+    public class GoToWCIfFree : Leaf
+    {
+        public GoToWCIfFree(Transform transform, NavMeshAgent navMeshAgent, WCBehavior wc, float wcSpeed)
+        {
+            _wcBehavior = wc; 
+            _transform = transform; 
+            _navMeshAgent = navMeshAgent;
+            _wcSpeed = wcSpeed;
+        }
+        public override State Process() 
+        {
+            
+            if (_wcBehavior.IsWCFree())
+            {
+                _navMeshAgent.SetDestination(_wcBehavior.transform.position);
+                _navMeshAgent.speed = _wcSpeed;
+                if (Vector3.SqrMagnitude(_wcBehavior.transform.position - _transform.position) <= 2f)
+                {
+                    return State.SUCCESS;
+                }
+            }
+            else
+            {
+                _navMeshAgent.speed = _wcSpeed/2;
+                return State.FAIL;
+            }
+            return State.RUNNING;
+        }
+        WCBehavior _wcBehavior;
+        Transform _transform;
+        NavMeshAgent _navMeshAgent;
+        float _originalSpeed;
+        float _wcSpeed;
+    }
 }

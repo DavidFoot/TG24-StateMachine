@@ -16,16 +16,17 @@ namespace BehaviorTree
         }
         public override State Process()
         {
+            if (_waypoints == null) return State.FAIL;
+            if (_waypoints.Count == 0) return State.FAIL;
+
             if (_index == _waypoints.Count) { 
                 _index = 0;
                 return State.SUCCESS; 
             }
             var currentWaypoint = _waypoints[_index];
             _navMeshAgent.SetDestination(currentWaypoint.position);
-            Debug.Log(_index);
             if (Vector3.SqrMagnitude(currentWaypoint.position - _transform.position) <= 3f) { 
                 _index++;
-                Debug.Log(Vector3.SqrMagnitude(currentWaypoint.position - _transform.position));
             }
             return State.RUNNING;
         }
