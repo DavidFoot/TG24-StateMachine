@@ -22,8 +22,10 @@ namespace BehaviorTree
             if (_timer >= _duration)
             {
                 _timer = 0;
-                return State.SUCCESS;
+                Debug.Log($"WaitForSecondsLeaf : Fail");
+                return State.FAIL;
             }
+            Debug.Log($"WaitForSecondsLeaf : Running");
             return State.RUNNING;
         }
 
@@ -70,16 +72,19 @@ namespace BehaviorTree
             {
                 _navMeshAgent.SetDestination(_wcBehavior.transform.position);
                 _navMeshAgent.speed = _wcSpeed;
-                if (Vector3.SqrMagnitude(_wcBehavior.transform.position - _transform.position) <= 2f)
+                if (Vector3.SqrMagnitude(_wcBehavior.transform.position - _transform.position) <= 1f)
                 {
+                    Debug.Log($"GoToWCIfFree : Success");
                     return State.SUCCESS;
                 }
             }
             else
             {
                 _navMeshAgent.speed = _wcSpeed/2;
+                Debug.Log($"GoToWCIfFree : Fail");
                 return State.FAIL;
             }
+            Debug.Log($"GoToWCIfFree : Running");
             return State.RUNNING;
         }
         WCBehavior _wcBehavior;

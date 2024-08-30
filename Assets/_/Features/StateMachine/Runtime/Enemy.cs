@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 namespace StateMachineRuntime
 {
@@ -10,6 +11,19 @@ namespace StateMachineRuntime
         #endregion
 
         #region Unity API
+        private void Start()
+        {
+            
+        }
+
+
+        private void Update()
+        {
+            if (Physics.Linecast(transform.position, _target.position,_layermask))
+            {
+                //Debug.Log("blocked");
+            }
+        }
 
         #endregion
 
@@ -54,6 +68,7 @@ namespace StateMachineRuntime
         [SerializeField] private float _health = 100;
         [SerializeField] private float _stamina = 10;
         [SerializeField] private Transform _target;
+        [SerializeField] private LayerMask _layermask;
 
         #endregion
     }

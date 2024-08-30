@@ -16,6 +16,7 @@ namespace BehaviorTree
             //_mainNode = new AllNodesCheckSelector();
             _mainNode = new AllNodesCheckSelector();
             _mainNode._children.Add(new GoToWCIfFree(transform,GetComponent<NavMeshAgent>(),_wc, _wcSpeed));
+            _mainNode._children.Add(new WaitForSecondsLeaf(4));
             _mainNode._children.Add(new PatrolLeaf(transform,GetComponent<NavMeshAgent>(), _patrolPoints.GetWaypoints()));
 
             //_mainNode._children.Add(new WaitForSecondsLeaf(2));
@@ -25,7 +26,7 @@ namespace BehaviorTree
 
             //_compositeNode_01._children.Add(new WaitForSecondsLeaf(2));
             //_compositeNode_01._children.Add(new GameObjectActivationLeaf(_gameObject, true));
-            //_compositeNode_01._children.Add(new WaitForSecondsLeaf(2));
+            //
             //_compositeNode_01._children.Add(new GameObjectActivationLeaf(_gameObject, false));
             //_compositeNode_01._children.Add(new HelloWorldLeaf("Ceci est une sequence"));
 
